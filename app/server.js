@@ -34,7 +34,9 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Page Routing
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'pages/products.html')));
+app.get('/', (req, res) => 
+    res.sendFile(path.join(__dirname, 'pages/login.html'))
+);
 app.get('/:page.html', (req, res) => {
     const pagePath = path.join(__dirname, 'pages', `${req.params.page}.html`);
     if (fs.existsSync(pagePath)) {
