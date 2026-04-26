@@ -1,18 +1,10 @@
-Since you are building this for a lab, the `README.md` should serve as both a setup guide and a "cheat sheet" for instructors. 
-
-Here is the complete, professionally formatted `README.md` for your project.
-
----
-
-=== FILE: README.md ===
-
-# 🛡️ VulnShop v1.0: Educational Lab Environment
+# VulnShop v1.0: Educational Lab Environment
 
 **WARNING: This application is INTENTIONALLY VULNERABLE. Do not host this on a public-facing server or use it for production purposes.**
 
 VulnShop is a deliberately insecure e-commerce web application built for cybersecurity students. It provides a hands-on environment to practice the full "Kill Chain" of a web attack, from reconnaissance to data exfiltration.
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install Dependencies:**
    ```bash
@@ -33,7 +25,7 @@ VulnShop is a deliberately insecure e-commerce web application built for cyberse
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Backend:** Node.js (Express.js)
 - **Database:** SQLite3 (In-memory)
 - **Auth:** JSON Web Tokens (JWT)
@@ -41,7 +33,7 @@ VulnShop is a deliberately insecure e-commerce web application built for cyberse
 
 ---
 
-## 🎯 Learning Objectives (Vulnerabilities)
+## Learning Objectives (Vulnerabilities)
 
 | Category | Vulnerability | Location |
 | :--- | :--- | :--- |
@@ -56,7 +48,7 @@ VulnShop is a deliberately insecure e-commerce web application built for cyberse
 
 ---
 
-## 🕵️ Exploitation Walkthrough
+## Exploitation Walkthrough
 
 ### 1. The Entry Point (SQLi)
 The login query uses string concatenation. 
@@ -89,7 +81,7 @@ The checkout API trusts the `total` field sent from the browser.
 
 ---
 
-## 🧹 Resetting the Lab
+##  Resetting the Lab
 Because the database is stored **in-memory**, simply restarting the server will reset all data, delete all created users, and clear the cart history.
 ```bash
 # Press Ctrl+C to stop
@@ -98,5 +90,5 @@ node server.js
 
 ---
 
-## 📝 Disclaimer
+##  Disclaimer
 This software is for educational purposes only. Use it to learn how to identify and fix vulnerabilities, not for illegal activities. The author is not responsible for any misuse.
