@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders - VulnShop</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav id="nav"></nav>
+    <h2>My Orders</h2>
+    <div id="order-list"></div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        async function loadOrders() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            // VULNERABILITY: IDOR is possible by calling /api/orders/1 directly
+            const res = await fetch(`/api/orders/user/${user.id}`, { headers: API.getHeaders() });
+            const orders = await res.json();
+            
+            document.getElementById('order-list').innerHTML = orders.map(o => `
+                <div class="card">
+                    <p>Order #: ${o.order_no}</p>
+                    <p>Status: ${o.status}</p>
+                    <p>Total: $${o.total}</p>
+                    <button onclick="viewDetail(${o.id})">View Details</button>
+                </div>
+            `).join('');
+        }
+
+        function viewDetail(id) {
+            fetch(`/api/orders/${id}`, { headers: API.getHeaders() })
+                .then(r => r.json())
+                .then(data => alert(JSON.stringify(data)));
+        }
+        loadOrders();
+    </script>
+</body>
+</html>

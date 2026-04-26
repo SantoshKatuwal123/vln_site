@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - VulnShop</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav id="nav"></nav>
+    <h2>Admin Dashboard</h2>
+    
+    <div class="card">
+        <h3>System Logs</h3>
+        <button onclick="fetchLogs()">Refresh Logs</button>
+        <div id="logs-container" style="background:#000; color:#0f0; padding:10px; margin-top:10px; height:200px; overflow:auto;">
+            Click refresh to load...
+        </div>
+        <p><small>Hint: Try fetching /api/admin/logs?file=../../.env</small></p>
+    </div>
+
+    <div class="card">
+        <h3>Upload Product Image</h3>
+        <input type="file" id="imageFile">
+        <button onclick="uploadFile()">Upload</button>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        async function fetchLogs() {
+            const res = await fetch('/api/admin/logs', { headers: API.getHeaders() });
+            const data = await res.text();
+            document.getElementById('logs-container').innerHTML = data;
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById('imageFile');
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+
+            const res = await fetch('/api/admin/upload-product-image', {
+                method: 'POST',
+                headers: { 'Authorization': localStorage.getItem('token') },
+                body: formData
+            });
+            const data = await res.json();
+            alert(data.message + ": " + data.path);
+        }
+    </script>
+</body>
+</html>
